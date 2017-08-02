@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import juard.Contract;
+import juard.contract.Contract;
 
 public class TcpConnectionService implements ConnectionService
 {
@@ -18,16 +18,16 @@ public class TcpConnectionService implements ConnectionService
 	{
 		TcpConnectionService service = new TcpConnectionService(host, port);
 		
-		Contract.EnsureNotNull(service);
+		Contract.NotNull(service);
 		return service;
 	}
 	
 	private TcpConnectionService(String host, int port)
 	{
-		Contract.RequireNotNull(host);
-		Contract.Require(!host.isEmpty());
-		Contract.Require(port >= 0);
-		Contract.Require(port <= 65535);
+		Contract.NotNull(host);
+		Contract.Satisfy(!host.isEmpty());
+		Contract.Satisfy(port >= 0);
+		Contract.Satisfy(port <= 65535);
 		
 		this.host = host;
 		this.port = port;
