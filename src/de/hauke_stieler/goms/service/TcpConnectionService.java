@@ -70,20 +70,6 @@ public class TcpConnectionService implements ConnectionService
 	}
 	
 	@Override
-	public void addReceivedListener()
-	{
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public void removeReceivedListener()
-	{
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
 	public void sendData(String data)
 	{
 		// TODO Auto-generated method stub
