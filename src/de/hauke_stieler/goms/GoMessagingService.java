@@ -3,6 +3,7 @@ package de.hauke_stieler.goms;
 import java.io.Closeable;
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.List;
 
 import com.google.gson.Gson;
 
@@ -24,12 +25,12 @@ public class GoMessagingService implements Closeable
 	
 	public void register(String... topics) throws IOException
 	{
+		Contract.NotNull(topics);
+		Contract.Satisfy(topics.length > 0);
+		
 		Register register = new Register(topics);
 		
-		Gson gson = new Gson();
-		String registerString = gson.toJson(register);
-		
-		service.send(registerString);
+		sendMessage(register);
 	}
 	
 	public void send(String data, String... topics) throws IOException
@@ -41,10 +42,29 @@ public class GoMessagingService implements Closeable
 		
 		Send send = new Send(data, topics);
 		
-		Gson gson = new Gson();
-		String sendString = gson.toJson(send);
+		sendMessage(send);
+	}
+	
+	public void send(String data, List<String> topics) throws IOException
+	{
+		Contract.NotNull(data);
+		Contract.NotNull(topics);
+		Contract.Satisfy(topics.size() > 0);
+		Contract.NotNull(service);
 		
-		service.send(sendString);
+		Send send = new Send(data, topics);
+		
+		sendMessage(send);
+	}
+	
+	private void sendMessage(Object messageObject) throws IOException
+	{
+		Contract.NotNull(messageObject);
+		
+		Gson gson = new Gson();
+		String messageString = gson.toJson(messageObject);
+		
+		service.send(messageString);
 	}
 	
 	@Override

@@ -21,4 +21,14 @@ public class Send
 		this.topics = Arrays.asList(topics);
 		this.data = data;
 	}
+	
+	public Send(String data, List<String> topics)
+	{
+		Contract.NotNull(topics);
+		Contract.Satisfy(topics.size() > 0);
+		Contract.NotNull(data);
+		
+		this.topics = topics;
+		this.data = data;
+	}
 }
