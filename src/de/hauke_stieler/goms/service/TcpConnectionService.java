@@ -7,9 +7,12 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import juard.contract.Contract;
+import juard.event.DataEvent;
 
 public class TcpConnectionService implements ConnectionService
 {
+	public DataEvent<String> MessageReceived = new DataEvent<String>();
+	
 	private String	host;
 	private int		port;
 	private Socket	socket;
@@ -42,16 +45,12 @@ public class TcpConnectionService implements ConnectionService
 			try (BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream())))
 			{
 				String line;
-				int i = 0;
 				line = reader.readLine();
 				
 				System.out.println("listen");
 				while (!line.isEmpty() && !socket.isClosed())
 				{
-					// TODO fire event
-					String x = line + " -- " + i;
-					System.out.println(x);
-					i++;
+					MessageReceived.fireEvent(line);
 					
 					line = reader.readLine();
 				}

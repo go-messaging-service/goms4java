@@ -12,15 +12,22 @@ import de.hauke_stieler.goms.material.Send;
 import de.hauke_stieler.goms.service.ConnectionService;
 import de.hauke_stieler.goms.service.TcpConnectionService;
 import juard.contract.Contract;
+import juard.event.DataEvent;
 
 public class GoMessagingService implements Closeable
 {
+	public DataEvent<String> MessageReceived = new DataEvent<String>();
+	
 	private ConnectionService service;
 	
 	public GoMessagingService(String host, int port) throws UnknownHostException, IOException
 	{
-		service = new TcpConnectionService(host, port);
+		TcpConnectionService service = new TcpConnectionService(host, port);
+		
 		service.connect();
+		service.MessageReceived.add(data -> MessageReceived.fireEvent(data));
+		
+		this.service = service;
 	}
 	
 	public void register(String... topics) throws IOException

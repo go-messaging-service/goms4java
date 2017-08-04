@@ -7,6 +7,8 @@ public class jgoms
 		System.out.println("connect");
 		try (GoMessagingService service = new GoMessagingService("localhost", 55545))
 		{
+			service.MessageReceived.add(data -> System.out.println("received: " + data));
+			
 			Thread.sleep(100);
 			
 			System.out.println("send (register)");
