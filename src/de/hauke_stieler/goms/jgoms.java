@@ -8,20 +8,24 @@ public class jgoms
 	public static void main(String[] args)
 	{
 		ConnectionService service = new TcpConnectionService("localhost", 55545);
-
+		
 		try
 		{
-			System.out.println(1);
+			System.out.println("connect");
 			service.connect();
-			System.out.println(2);
-			Thread.sleep(1000);
+			
+			System.out.println("send (register)");
 			service.send("{\"type\":\"register\",\"topics\":[\"golang\",\"news\"]}");
-			System.out.println(3);
+			
+			System.out.println("send (data)");
+			service.send("{\"type\":\"send\",\"topics\":[\"golang\",\"news\"],\"data\":\"Hallo123\"}");
+			
+			System.out.println("close");
+			service.close();
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
-			System.out.println(4);
-			// TODO Auto-generated catch block
+			System.out.println("error");
 			e.printStackTrace();
 		}
 	}
