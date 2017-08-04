@@ -1,5 +1,7 @@
 package de.hauke_stieler.goms;
 
+import de.hauke_stieler.goms.material.Error;
+
 public class jgoms
 {
 	public static void main(String[] args)
@@ -28,9 +30,9 @@ public class jgoms
 		}
 	}
 	
-	private static void error(String data)
+	private static void error(Error error)
 	{
-		System.out.println("error: " + data);
+		System.out.println("error: " + error.getErrorCode() + ": " + error.getErrorMessage());
 	}
 	
 	private static void print(String data)
