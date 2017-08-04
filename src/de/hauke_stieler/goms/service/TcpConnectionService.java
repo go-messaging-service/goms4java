@@ -39,23 +39,26 @@ public class TcpConnectionService implements ConnectionService
 	{
 		Thread thread = new Thread(() ->
 		{
-			try
+			try (BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream())))
 			{
-				BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-				
 				String line;
+				int i = 0;
 				line = reader.readLine();
 				
-				while (!line.isEmpty())
+				System.out.println("listen");
+				while (!line.isEmpty() && !socket.isClosed())
 				{
 					// TODO fire event
-					System.out.println(line);
+					String x = line + " -- " + i;
+					System.out.println(x);
+					i++;
 					
 					line = reader.readLine();
 				}
 			}
 			catch (Exception e)
 			{
+				System.out.println("suddenly disconnected");
 			}
 		});
 		thread.start();
@@ -78,6 +81,7 @@ public class TcpConnectionService implements ConnectionService
 	@Override
 	public void close() throws IOException
 	{
+		socket.getInputStream().close();
 		socket.close();
 	}
 }

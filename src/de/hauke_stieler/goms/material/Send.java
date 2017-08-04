@@ -7,8 +7,7 @@ import juard.contract.Contract;
 
 public class Send
 {
-	private static final String type = "send";
-	
+	private final String	type	= "send";
 	private List<String>	topics;
 	private String			data;
 	
