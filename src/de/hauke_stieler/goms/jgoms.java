@@ -11,7 +11,7 @@ public class jgoms
 			service.register("golang", "news");
 			
 			System.out.println("send (data)");
-			service.send("{\"type\":\"send\",\"topics\":[\"golang\",\"news\"],\"data\":\"Hallo123\"}");
+			service.send("Hallo123", "golang", "news");
 			
 			System.out.println("close");
 			service.close();

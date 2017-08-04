@@ -7,6 +7,7 @@ import java.net.UnknownHostException;
 import com.google.gson.Gson;
 
 import de.hauke_stieler.goms.material.Register;
+import de.hauke_stieler.goms.material.Send;
 import de.hauke_stieler.goms.service.ConnectionService;
 import de.hauke_stieler.goms.service.TcpConnectionService;
 import juard.contract.Contract;
@@ -26,15 +27,24 @@ public class GoMessagingService implements Closeable
 		Register register = new Register(topics);
 		
 		Gson gson = new Gson();
-		String data = gson.toJson(register);
+		String registerString = gson.toJson(register);
 		
-		service.send(data);
+		service.send(registerString);
 	}
 	
-	public void send(String data) throws IOException
+	public void send(String data, String... topics) throws IOException
 	{
 		Contract.NotNull(data);
+		Contract.NotNull(topics);
+		Contract.Satisfy(topics.length > 0);
 		Contract.NotNull(service);
+		
+		Send send = new Send(data, topics);
+		
+		Gson gson = new Gson();
+		String sendString = gson.toJson(send);
+		
+		service.send(sendString);
 	}
 	
 	@Override
