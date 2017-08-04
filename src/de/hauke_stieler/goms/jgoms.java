@@ -1,10 +1,13 @@
 package de.hauke_stieler.goms;
 
+import de.hauke_stieler.goms.service.ConnectionService;
+import de.hauke_stieler.goms.service.TcpConnectionService;
+
 public class jgoms
 {
 	public static void main(String[] args)
 	{
-		GoMessagingService service = new GoMessagingService("localhost", 55545);
+		ConnectionService service = new TcpConnectionService("localhost", 55545);
 
 		try
 		{

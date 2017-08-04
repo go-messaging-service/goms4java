@@ -1,6 +1,7 @@
 package de.hauke_stieler.goms.service;
 
 import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
@@ -8,21 +9,13 @@ import java.net.UnknownHostException;
 
 import juard.contract.Contract;
 
-public class TcpConnectionService implements ConnectionService
+public class TcpConnectionService implements ConnectionService, Closeable
 {
 	private String	host;
 	private int		port;
 	private Socket	socket;
 	
-	public static ConnectionService create(String host, int port)
-	{
-		TcpConnectionService service = new TcpConnectionService(host, port);
-		
-		Contract.NotNull(service);
-		return service;
-	}
-	
-	private TcpConnectionService(String host, int port)
+	public TcpConnectionService(String host, int port)
 	{
 		Contract.NotNull(host);
 		Contract.Satisfy(!host.isEmpty());
@@ -70,10 +63,19 @@ public class TcpConnectionService implements ConnectionService
 	}
 	
 	@Override
-	public void sendData(String data)
+	public void send(String data) throws IOException
 	{
-		// TODO Auto-generated method stub
-		
+		if(!data.endsWith("\n"))
+		{
+			data = data + "\n";
+		}
+
+		socket.getOutputStream().write(data.getBytes());
 	}
-	
+
+	@Override
+	public void close() throws IOException
+	{
+		socket.close();
+	}
 }

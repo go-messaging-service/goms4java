@@ -7,5 +7,5 @@ public interface ConnectionService
 {
 	void connect() throws UnknownHostException, IOException;
 	
-	void sendData(String data);
+	void send(String data) throws IOException;
 }
