@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 
 import juard.contract.Contract;
 
-public class TcpConnectionService implements ConnectionService, Closeable
+public class TcpConnectionService implements ConnectionService
 {
 	private String	host;
 	private int		port;
