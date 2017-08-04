@@ -7,9 +7,14 @@ import juard.contract.Contract;
 
 public class Send
 {
-	private final String	type	= "send";
-	private List<String>	topics;
-	private String			data;
+	@SuppressWarnings ("unused")
+	private final String type = "send";
+	
+	@SuppressWarnings ("unused")
+	private List<String> topics;
+	
+	@SuppressWarnings ("unused")
+	private String data;
 	
 	public Send(String data, String... topics)
 	{

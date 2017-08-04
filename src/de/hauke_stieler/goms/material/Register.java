@@ -7,8 +7,11 @@ import juard.contract.Contract;
 
 public class Register
 {
-	private final String	type	= "register";
-	private List<String>	topics;
+	@SuppressWarnings ("unused")
+	private final String type = "register";
+	
+	@SuppressWarnings ("unused")
+	private List<String> topics;
 	
 	public Register(String... topics)
 	{
