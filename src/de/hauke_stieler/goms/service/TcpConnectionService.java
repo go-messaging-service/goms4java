@@ -1,7 +1,6 @@
 package de.hauke_stieler.goms.service;
 
 import java.io.BufferedReader;
-import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
@@ -65,14 +64,17 @@ public class TcpConnectionService implements ConnectionService
 	@Override
 	public void send(String data) throws IOException
 	{
-		if(!data.endsWith("\n"))
+		Contract.NotNull(data);
+		Contract.NotNull(socket);
+		
+		if (!data.endsWith("\n"))
 		{
 			data = data + "\n";
 		}
-
+		
 		socket.getOutputStream().write(data.getBytes());
 	}
-
+	
 	@Override
 	public void close() throws IOException
 	{
