@@ -6,9 +6,8 @@ import java.util.List;
 
 import juard.contract.Contract;
 
-public class Message
+public class Message extends AbstractMessage
 {
-	private String			type;
 	private List<String>	topics;
 	private String			data;
 	
@@ -20,11 +19,6 @@ public class Message
 		
 		this.data = data;
 		this.topics = Arrays.asList(topics);
-	}
-	
-	public String getType()
-	{
-		return type;
 	}
 	
 	public String getData()
