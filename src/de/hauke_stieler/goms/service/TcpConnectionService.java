@@ -6,12 +6,15 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import com.google.gson.Gson;
+
+import de.hauke_stieler.goms.material.Message;
 import juard.contract.Contract;
 import juard.event.DataEvent;
 
 public class TcpConnectionService implements ConnectionService
 {
-	public DataEvent<String> MessageReceived = new DataEvent<String>();
+	public DataEvent<Message> MessageReceived = new DataEvent<Message>();
 	
 	private String	host;
 	private int		port;
@@ -44,13 +47,22 @@ public class TcpConnectionService implements ConnectionService
 		{
 			try (BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream())))
 			{
-				String line;
-				line = reader.readLine();
+				String line = reader.readLine();
+				Gson gson = new Gson();
 				
 				System.out.println("listen");
 				while (!line.isEmpty() && !socket.isClosed())
 				{
-					MessageReceived.fireEvent(line);
+					Message message = gson.fromJson(line, Message.class);
+					
+					if (message.getType().equals("error"))
+					{
+						System.out.println(line);
+					}
+					else
+					{
+						MessageReceived.fireEvent(message);
+					}
 					
 					line = reader.readLine();
 				}
@@ -58,6 +70,7 @@ public class TcpConnectionService implements ConnectionService
 			catch (Exception e)
 			{
 				System.out.println("suddenly disconnected");
+				e.printStackTrace();
 			}
 		});
 		thread.start();
@@ -80,7 +93,6 @@ public class TcpConnectionService implements ConnectionService
 	@Override
 	public void close() throws IOException
 	{
-		socket.getInputStream().close();
 		socket.close();
 	}
 }
