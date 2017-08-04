@@ -7,6 +7,8 @@ public class jgoms
 		System.out.println("connect");
 		try (GoMessagingService service = new GoMessagingService("localhost", 55545))
 		{
+			service.ErrorReceived.add(data -> error(data));
+			
 			Thread.sleep(100);
 			
 			System.out.println("register");
@@ -16,7 +18,7 @@ public class jgoms
 			System.out.println("send");
 			service.send("Hallo\n123", "golang", "news");
 			
-			Thread.sleep(300);
+			Thread.sleep(1000);
 			System.out.println("close");
 		}
 		catch (Exception e)
@@ -24,6 +26,11 @@ public class jgoms
 			System.out.println("error");
 			e.printStackTrace();
 		}
+	}
+	
+	private static void error(String data)
+	{
+		System.out.println("error: " + data);
 	}
 	
 	private static void print(String data)

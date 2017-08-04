@@ -9,14 +9,15 @@ import java.net.UnknownHostException;
 import com.google.gson.Gson;
 
 import de.hauke_stieler.goms.material.AbstractMessage;
+import de.hauke_stieler.goms.material.ErrorMessage;
 import de.hauke_stieler.goms.material.Message;
 import juard.contract.Contract;
 import juard.event.DataEvent;
 
 public class TcpConnectionService implements ConnectionService
 {
-	public DataEvent<Message>	MessageReceived	= new DataEvent<Message>();
-	public DataEvent<Message>	ErrorReceived	= new DataEvent<Message>();
+	public DataEvent<Message>		MessageReceived	= new DataEvent<Message>();
+	public DataEvent<ErrorMessage>	ErrorReceived	= new DataEvent<ErrorMessage>();
 	
 	private String	host;
 	private int		port;
@@ -59,7 +60,7 @@ public class TcpConnectionService implements ConnectionService
 					
 					if (message.getType().equals("error"))
 					{
-						ErrorReceived.fireEvent(new Message("error", "test"));
+						ErrorReceived.fireEvent(gson.fromJson(line, ErrorMessage.class));
 					}
 					else
 					{
