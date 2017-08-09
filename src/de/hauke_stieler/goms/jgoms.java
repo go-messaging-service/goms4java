@@ -18,7 +18,9 @@ public class jgoms
 			service.register(data -> print(data), "news");
 			
 			System.out.println("send");
-			service.send("Hallo\n123", "golang", "news");
+			service.send("Test1", "golang", "news");
+			service.send("Test2", "golang");
+			service.send("Test3", "news");
 			
 			Thread.sleep(1000);
 			System.out.println("close");
