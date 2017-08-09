@@ -54,7 +54,7 @@ public class TcpConnectionService implements ConnectionService
 				Gson gson = new Gson();
 				
 				System.out.println("listen");
-				while (!line.isEmpty() && !socket.isClosed())
+				while (line != null && !line.isEmpty() && !socket.isClosed())
 				{
 					AbstractMessage message = gson.fromJson(line, AbstractMessage.class);
 					
