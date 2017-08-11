@@ -2,19 +2,17 @@ package de.hauke_stieler.goms.material;
 
 import java.util.List;
 
-public class Send 
+public class Logout 
 {
 	private String messagetype;
 	private List<String> topics;
-	private String data;
 
-	public Send(){}
+	public Logout(){}
 
-	public Send(String messagetype, List<String> topics, String data)
+	public Logout(String messagetype, List<String> topics)
 	{
 		this.messagetype = messagetype;
 		this.topics = topics;
-		this.data = data;
 	}
 
 	public String getmessagetype()
@@ -25,11 +23,6 @@ public class Send
 	public List<String> gettopics()
 	{
 		return topics;
-	}
-
-	public String getdata()
-	{
-		return data;
 	}
 }
 

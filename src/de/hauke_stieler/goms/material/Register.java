@@ -20,19 +20,9 @@ public class Register
 		return messagetype;
 	}
 
-	public void setmessagetype(String messagetype)
-	{
-		this.messagetype = messagetype;
-	}
-
 	public List<String> gettopics()
 	{
 		return topics;
-	}
-
-	public void settopics(List<String> topics)
-	{
-		this.topics = topics;
 	}
 }
 
