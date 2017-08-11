@@ -1,22 +1,39 @@
 package de.hauke_stieler.goms.material;
 
-import java.util.Arrays;
 import java.util.List;
 
-import juard.contract.Contract;
-
-public class Register
+public class Register 
 {
-	@SuppressWarnings ("unused")
-	private final String type = "register";
-	
-	@SuppressWarnings ("unused")
+	private String messagetype;
 	private List<String> topics;
-	
-	public Register(String... topics)
+
+	public Register(){}
+
+	public Register(String messagetype, List<String> topics)
 	{
-		Contract.NotNull(topics);
-		
-		this.topics = Arrays.asList(topics);
+		this.messagetype = messagetype;
+		this.topics = topics;
+	}
+
+	public String getmessagetype()
+	{
+		return messagetype;
+	}
+
+	public void setmessagetype(String messagetype)
+	{
+		this.messagetype = messagetype;
+	}
+
+	public List<String> gettopics()
+	{
+		return topics;
+	}
+
+	public void settopics(List<String> topics)
+	{
+		this.topics = topics;
 	}
 }
+
+

@@ -4,6 +4,7 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,15 +43,15 @@ public class GoMessagingService implements Closeable
 	
 	private void handleReceivedMessage(Message data)
 	{
-		for (String topic : data.getTopics())
+		for (String topic : data.gettopics())
 		{
-			messageHandlerList.get(topic).forEach(handler -> handler.handleEvent(data.getData()));
+			messageHandlerList.get(topic).forEach(handler -> handler.handleEvent(data.getdata()));
 		}
 	}
 	
 	private void handleReceivedError(ErrorMessage data)
 	{
-		Error error = new Error(data.getErrorCode(), data.getError());
+		Error error = new Error(data.geterrorcode(), data.geterror());
 		
 		ErrorReceived.fireEvent(error);
 	}
@@ -70,7 +71,8 @@ public class GoMessagingService implements Closeable
 			messageHandlerList.get(topic).add(handler);
 		}
 		
-		Register register = new Register(topics);
+		// TODO create enum for the "register" until json2code supports enums
+		Register register = new Register("register", Arrays.asList(topics));
 		
 		sendMessage(register);
 	}
@@ -82,19 +84,8 @@ public class GoMessagingService implements Closeable
 		Contract.Satisfy(topics.length > 0);
 		Contract.NotNull(service);
 		
-		Send send = new Send(data, topics);
-		
-		sendMessage(send);
-	}
-	
-	public void send(String data, List<String> topics) throws IOException
-	{
-		Contract.NotNull(data);
-		Contract.NotNull(topics);
-		Contract.Satisfy(topics.size() > 0);
-		Contract.NotNull(service);
-		
-		Send send = new Send(data, topics);
+		// TODO create enum for the "send" until json2code supports enums
+		Send send = new Send("send", Arrays.asList(topics), data);
 		
 		sendMessage(send);
 	}

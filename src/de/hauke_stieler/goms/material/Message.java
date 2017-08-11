@@ -1,34 +1,36 @@
 package de.hauke_stieler.goms.material;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import juard.contract.Contract;
-
-public class Message extends AbstractMessage
+public class Message 
 {
-	private List<String>	topics;
-	private String			data;
-	
-	public Message(String data, String... topics)
+	private String messagetype;
+	private List<String> topics;
+	private String data;
+
+	public Message(){}
+
+	public Message(String messagetype, List<String> topics, String data)
 	{
-		Contract.NotNull(data);
-		Contract.NotNull(topics);
-		Contract.Satisfy(topics.length > 0);
-		
+		this.messagetype = messagetype;
+		this.topics = topics;
 		this.data = data;
-		this.topics = Arrays.asList(topics);
 	}
-	
-	public String getData()
+
+	public String getmessagetype()
+	{
+		return messagetype;
+	}
+
+	public List<String> gettopics()
+	{
+		return topics;
+	}
+
+	public String getdata()
 	{
 		return data;
 	}
-	
-	public List<String> getTopics()
-	{
-		// calling the constructor will copy the entire list
-		return new ArrayList<>(topics);
-	}
 }
+
+

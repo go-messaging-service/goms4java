@@ -1,11 +1,22 @@
 package de.hauke_stieler.goms.material;
 
-public class AbstractMessage
+import java.util.List;
+
+public class AbstractMessage 
 {
-	private String type;
-	
-	public String getType()
+	private String messagetype;
+
+	public AbstractMessage(){}
+
+	public AbstractMessage(String messagetype)
 	{
-		return type;
+		this.messagetype = messagetype;
+	}
+
+	public String getmessagetype()
+	{
+		return messagetype;
 	}
 }
+
+

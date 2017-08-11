@@ -58,7 +58,7 @@ public class TcpConnectionService implements ConnectionService
 				{
 					AbstractMessage message = gson.fromJson(line, AbstractMessage.class);
 					
-					if (message.getType().equals("error"))
+					if (message.getmessagetype().equals("error"))
 					{
 						ErrorReceived.fireEvent(gson.fromJson(line, ErrorMessage.class));
 					}

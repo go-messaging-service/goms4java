@@ -1,38 +1,51 @@
 package de.hauke_stieler.goms.material;
 
-import java.util.Arrays;
 import java.util.List;
 
-import juard.contract.Contract;
-
-public class Send
+public class Send 
 {
-	@SuppressWarnings ("unused")
-	private final String type = "send";
-	
-	@SuppressWarnings ("unused")
+	private String messagetype;
 	private List<String> topics;
-	
-	@SuppressWarnings ("unused")
 	private String data;
-	
-	public Send(String data, String... topics)
+
+	public Send(){}
+
+	public Send(String messagetype, List<String> topics, String data)
 	{
-		Contract.NotNull(topics);
-		Contract.Satisfy(topics.length > 0);
-		Contract.NotNull(data);
-		
-		this.topics = Arrays.asList(topics);
-		this.data = data;
-	}
-	
-	public Send(String data, List<String> topics)
-	{
-		Contract.NotNull(topics);
-		Contract.Satisfy(topics.size() > 0);
-		Contract.NotNull(data);
-		
+		this.messagetype = messagetype;
 		this.topics = topics;
 		this.data = data;
 	}
+
+	public String getmessagetype()
+	{
+		return messagetype;
+	}
+
+	public void setmessagetype(String messagetype)
+	{
+		this.messagetype = messagetype;
+	}
+
+	public List<String> gettopics()
+	{
+		return topics;
+	}
+
+	public void settopics(List<String> topics)
+	{
+		this.topics = topics;
+	}
+
+	public String getdata()
+	{
+		return data;
+	}
+
+	public void setdata(String data)
+	{
+		this.data = data;
+	}
 }
+
+
