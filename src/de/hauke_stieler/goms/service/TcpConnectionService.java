@@ -12,13 +12,9 @@ import de.hauke_stieler.goms.material.AbstractMessage;
 import de.hauke_stieler.goms.material.ErrorMessage;
 import de.hauke_stieler.goms.material.Message;
 import juard.contract.Contract;
-import juard.event.DataEvent;
 
-public class TcpConnectionService implements ConnectionService
+public class TcpConnectionService extends ConnectionService
 {
-	public DataEvent<Message>		MessageReceived	= new DataEvent<Message>();
-	public DataEvent<ErrorMessage>	ErrorReceived	= new DataEvent<ErrorMessage>();
-	
 	private String	host;
 	private int		port;
 	private Socket	socket;

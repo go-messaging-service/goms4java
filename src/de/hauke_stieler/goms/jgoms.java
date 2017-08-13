@@ -1,13 +1,14 @@
 package de.hauke_stieler.goms;
 
 import de.hauke_stieler.goms.material.Error;
+import de.hauke_stieler.goms.service.TcpConnectionService;
 
 public class jgoms
 {
 	public static void main(String[] args)
 	{
 		System.out.println("connect");
-		try (GoMessagingService service = new GoMessagingService("localhost", 55545))
+		try (GoMessagingService service = new GoMessagingService(new TcpConnectionService("localhost", 55545)))
 		{
 			service.ErrorReceived.add(data -> error(data));
 			

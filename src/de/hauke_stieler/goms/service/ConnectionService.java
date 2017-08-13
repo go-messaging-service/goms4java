@@ -4,9 +4,16 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
-public interface ConnectionService extends Closeable
+import de.hauke_stieler.goms.material.ErrorMessage;
+import de.hauke_stieler.goms.material.Message;
+import juard.event.DataEvent;
+
+public abstract class ConnectionService implements Closeable
 {
-	void connect() throws UnknownHostException, IOException;
+	public DataEvent<Message>		MessageReceived	= new DataEvent<Message>();
+	public DataEvent<ErrorMessage>	ErrorReceived	= new DataEvent<ErrorMessage>();
 	
-	void send(String data) throws IOException;
+	public abstract void connect() throws UnknownHostException, IOException;
+	
+	public abstract void send(String data) throws IOException;
 }
