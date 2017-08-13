@@ -10,8 +10,8 @@ import juard.event.DataEvent;
 
 public abstract class ConnectionService implements Closeable
 {
-	public DataEvent<Message>		MessageReceived	= new DataEvent<Message>();
-	public DataEvent<ErrorMessage>	ErrorReceived	= new DataEvent<ErrorMessage>();
+	DataEvent<Message>		MessageReceived	= new DataEvent<Message>();
+	DataEvent<ErrorMessage>	ErrorReceived	= new DataEvent<ErrorMessage>();
 	
 	public abstract void connect() throws UnknownHostException, IOException;
 	
