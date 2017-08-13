@@ -11,6 +11,7 @@ import java.util.Map;
 
 import com.google.gson.Gson;
 
+import de.hauke_stieler.goms.material.Close;
 import de.hauke_stieler.goms.material.Error;
 import de.hauke_stieler.goms.material.ErrorMessage;
 import de.hauke_stieler.goms.material.Message;
@@ -90,6 +91,17 @@ public class GoMessagingService implements Closeable
 		sendMessage(send);
 	}
 	
+	@Override
+	public void close() throws IOException
+	{
+		Contract.NotNull(service);
+		
+		// TODO create enum for the "close" until json2code supports enums
+		sendMessage(new Close("close"));
+		
+		service.close();
+	}
+	
 	private void sendMessage(Object messageObject) throws IOException
 	{
 		Contract.NotNull(messageObject);
@@ -98,13 +110,5 @@ public class GoMessagingService implements Closeable
 		String messageString = gson.toJson(messageObject);
 		
 		service.send(messageString);
-	}
-	
-	@Override
-	public void close() throws IOException
-	{
-		Contract.NotNull(service);
-		
-		service.close();
 	}
 }
