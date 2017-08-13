@@ -1,4 +1,4 @@
-package de.hauke_stieler.goms;
+package de.hauke_stieler.goms.service;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -18,7 +18,6 @@ import de.hauke_stieler.goms.material.Logout;
 import de.hauke_stieler.goms.material.Message;
 import de.hauke_stieler.goms.material.Register;
 import de.hauke_stieler.goms.material.Send;
-import de.hauke_stieler.goms.service.ConnectionService;
 import juard.contract.Contract;
 import juard.event.DataEvent;
 import juard.event.DataEventHandler;

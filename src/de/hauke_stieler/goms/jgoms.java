@@ -1,6 +1,7 @@
 package de.hauke_stieler.goms;
 
 import de.hauke_stieler.goms.material.Error;
+import de.hauke_stieler.goms.service.GoMessagingService;
 import de.hauke_stieler.goms.service.TcpConnectionService;
 
 public class jgoms
